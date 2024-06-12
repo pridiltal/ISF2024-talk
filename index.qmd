@@ -61,6 +61,9 @@ library(furrr)
 library(evd)
 library(ismev)
 library(plotly)
+
+library(coronavirus)
+
 ```
 ## Anomalies in Temporal Data
 
@@ -124,4 +127,33 @@ print(p)
 ```
 
 Data Source: https://denguedatahub.netlify.app/
+
+
+## {background-color="black" background-image="images/covid.png" 
+background-size="slide" }
+
+
+::: {.footer}
+Image Credit: https://www.airforcemedicine.af.mil/portals/1/Images/Graphics/200309-D-HN545-003.png
+
+:::
+
+
+## Daily COVID-19 Confirmed Cases in India
+
+```{r covid, fig.width=12}
+data("coronavirus")
+Indiadata<- coronavirus |>
+ as_tibble() |>
+  filter(country == "India" & type == "confirmed")|>
+  select(date, cases) |>
+  as_tsibble(index = date)
+
+p <- Indiadata |>
+  ggplot(aes(x= date, y= cases )) +
+  geom_line()+
+  geom_point()
+
+ggplotly(p)
+```
 

@@ -1,0 +1,145 @@
+---
+title: "A Backcasting Approach for Anomaly Detection in Time Series Data"
+author: "Priyanga Dilini Talagala"
+subtitle: "44th International Symposium on Forecasting, Dijon, France"
+footer: "Slides created with Quarto, available at prital.netlify.app."
+date: 07/01/2024
+date-format: long
+# logo: images/logo.png
+editor: source
+execute:
+  eval: true
+  echo: false
+  warning: false
+  error: false
+  message: false   
+format:
+  revealjs:
+    code-copy: hover
+    code-overflow: scroll
+    multiplex: false
+    embed-resources: true
+    controls: auto
+    progress: true
+    history: true
+    hash-type: number    
+    slide-number: c
+    show-slide-number: all  
+    menu:
+      side: right
+      width: normal
+      numbers: true
+    # chalkboard:
+    #   theme: chalkboard
+    #   src: drawings.json
+      read-only: false
+title-slide-attributes:
+  data-background-image: images/logo.png
+  data-background-opacity: "0.5"
+  data-background-size: 15%
+  data-background-position: 98% 98%
+  data-background-color: "#d4ca86"
+  # data-background-image: grid-worms/bird.webp
+  # background-iframe: grid-worms/index.html
+css: style.css
+preload-iframes: true
+---
+```{r}
+#setup
+
+library(fpp3)
+library(patchwork)
+library(tidyverse)
+library(twosamples)
+library(here)
+library(denguedatahub)
+library(rlang)
+
+library(future)
+library(furrr)
+
+library(evd)
+library(ismev)
+library(plotly)
+```
+## Anomalies in Temporal Data
+
+```{r tsout, fig.width=12}
+data <- srilanka_weekly_data |>
+  filter(district == "Ratnapura") |>
+  select(start.date, cases) 
+d <- which(data$start.date ==  "2019-12-21" )
+data <- data[-d[1],]
+data <- data |>
+  as_tsibble(index =start.date)
+
+p<- data |>
+  autoplot(cases)+
+  geom_point(data = data, aes(x = start.date,
+                              y=cases))+
+  labs(x= "Time", y= "")
+ggplotly(p)
+
+
+```
+
+
+## Dengue Outbreak {background-color="white" background-image="images/Dengue-Cases - Copy.jpg" 
+background-size="slide" }
+
+
+::: {.footer}
+Image Credit: https://www.cdc.gov/dengue/images/socialmedia/LVV7_Aedes_aegypti_Adult_Feeding_2022_029.jpg
+
+:::
+
+
+
+## {background-color="black"
+background-image="images/france.png" 
+background-size="contain"}
+
+
+
+## Weekly Dengue Cases in Ratnapura District, Sri Lanka
+
+
+
+```{r tsout2, fig.width=12}
+data <- srilanka_weekly_data |>
+  filter(district == "Ratnapura") |>
+  select(start.date, cases) 
+d <- which(data$start.date ==  "2019-12-21" )
+data <- data[-d[1],]
+data <- data |>
+  as_tsibble(index =start.date)
+
+p<- data |>
+  autoplot(cases)+
+  geom_point(data = data, aes(x = start.date,
+                              y=cases))+
+  labs(x= "Time", y= "Dengue Cases")
+
+print(p)
+```
+
+Data Source: https://denguedatahub.netlify.app/
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Code
+
+When you click the **Render** button a presentation will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```

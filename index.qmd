@@ -64,6 +64,7 @@ library(plotly)
 
 library(coronavirus)
 
+library(viridis)
 ```
 ## Anomalies in Temporal Data
 
@@ -81,14 +82,16 @@ p<- data |>
   geom_point(data = data, aes(x = start.date,
                               y=cases))+
   labs(x= "Time", y= "")
+ 
 ggplotly(p)
 
 
 ```
 
 
-## Dengue Outbreak {background-color="white" background-image="images/Dengue-Cases - Copy.jpg" 
-background-size="slide" }
+## Dengue Outbreak {background-color="black" background-image="images/Dengue-Cases - Copy.jpg" 
+background-size="slide" 
+background-position="90% 0%"}
 
 
 ::: {.footer}
@@ -129,6 +132,39 @@ print(p)
 Data Source: https://denguedatahub.netlify.app/
 
 
+## Weekly Dengue Cases in Sri Lanka
+
+```{r denguesl, fig.width=14, fig.height = 8}
+
+
+#  Visualizing colombo district cases
+number_ticks <- function(n) {function(limits) pretty(limits, n)}
+p<- srilanka_weekly_data %>%  
+ggplot(aes(x=start.date, y=cases)) + geom_line()  + 
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  facet_wrap(vars(district), scales = "fixed", ncol=6)+
+    labs(x = "Date" , y="Cases")
+
+print(p)
+```
+## Weekly Dengue Cases in Sri Lanka
+
+```{r denguesl2, fig.width=14, fig.height = 8}
+
+
+#  Visualizing colombo district cases
+number_ticks <- function(n) {function(limits) pretty(limits, n)}
+p<- srilanka_weekly_data %>%  
+ggplot(aes(x=start.date, y=cases)) + geom_line()  + 
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  facet_wrap(vars(district), scales = "free_y", ncol=6) +
+  labs(x = "Date" , y="Cases")
+
+print(p)
+```
+
 ## {background-color="black" background-image="images/covid.png" 
 background-size="slide" }
 
@@ -139,21 +175,49 @@ Image Credit: https://www.airforcemedicine.af.mil/portals/1/Images/Graphics/2003
 :::
 
 
-## Daily COVID-19 Confirmed Cases in India
+## Daily COVID-19 Confirmed Cases 
 
-```{r covid, fig.width=12}
+```{r covid, fig.width=14, fig.height = 8}
+
+countries <- c("India" , "Sri Lanka", "Italy", "Brazil",
+               "Greece", "US")
 data("coronavirus")
 Indiadata<- coronavirus |>
  as_tibble() |>
-  filter(country == "India" & type == "confirmed")|>
-  select(date, cases) |>
-  as_tsibble(index = date)
+  filter(country %in% countries & type == "confirmed")|>
+  select(date, cases, country) |>
+  as_tsibble(index = date, key = country)
 
 p <- Indiadata |>
+  group_by(country)|>
   ggplot(aes(x= date, y= cases )) +
   geom_line()+
-  geom_point()
-
-ggplotly(p)
+  geom_point()+
+  facet_wrap(vars(country), scales = "free_y", ncol=3)
+print(p)
 ```
+
+
+## 
+
+### Outbreak 
+
+An occurrence of a disease in a specific geographic area that is significantly higher than the established baselines. This increase can be either sudden or gradual.
+
+## {auto-animate=true}
+
+### Outbreak 
+
+An occurrence of a disease in a specific geographic area that is significantly higher than the established baselines. This increase can be either sudden or gradual.
+
+$$\quad$$
+
+
+### What is an Anomaly ?
+
+We define an anomaly as an observation that is very unlikely given the backcasted distribution.
+
+
+
+
 

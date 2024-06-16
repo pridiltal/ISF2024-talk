@@ -70,7 +70,7 @@ library(viridis)
 
 ```{r tsout, fig.height= 6}
 data <- srilanka_weekly_data |>
-  filter(district == "Ratnapura") |>
+  filter(district == "Gampaha") |>
   select(start.date, cases) 
 d <- which(data$start.date ==  "2019-12-21" )
 data <- data[-d[1],]
@@ -91,7 +91,8 @@ ggplotly(p)
 
 ## Dengue Outbreak {background-color="black" background-image="images/Dengue-Cases - Copy.jpg" 
 background-size="slide" 
-background-position="90% 0%"}
+background-position="50% 50%, bottom"}
+
 
 
 ::: {.footer}
@@ -107,13 +108,13 @@ background-size="contain"}
 
 
 
-## Weekly Dengue Cases in Ratnapura District, Sri Lanka
+## Weekly Dengue Cases in Gampaha District, Sri Lanka
 
 
 
 ```{r tsout2, fig.width=12}
 data <- srilanka_weekly_data |>
-  filter(district == "Ratnapura") |>
+  filter(district == "Gampaha") |>
   select(start.date, cases) 
 d <- which(data$start.date ==  "2019-12-21" )
 data <- data[-d[1],]
@@ -210,14 +211,145 @@ An occurrence of a disease in a specific geographic area that is significantly h
 
 An occurrence of a disease in a specific geographic area that is significantly higher than the established baselines. This increase can be either sudden or gradual.
 
-$$\quad$$
-
 
 ### What is an Anomaly ?
 
 We define an anomaly as an observation that is very unlikely given the backcasted distribution.
 
+An anomaly is an observation that exhibits a significant deviation from the established typical behavior.
+
+
+## {background-color="black"
+background-image="images/Method1.png" 
+background-size="contain"}
+
+
+## {background-color="black"
+background-image="images/Method2.png" 
+background-size="contain"}
+
+
+## {background-color="black"
+background-image="images/Method3.png" 
+background-size="contain"}
+
+
+## {background-color="black"
+background-image="images/Method4.png" 
+background-size="contain"}
+
+
+## {background-color="black"
+background-image="images/Method5.png" 
+background-size="contain"}
+
+
+## {background-color="black"
+background-image="images/Method6.png" 
+background-size="contain"}
 
 
 
+## {background-color="black"
+background-image="images/Method7.png" 
+background-size="contain"}
+
+
+## {background-color="black"
+background-image="images/Method8.png" 
+background-size="contain"}
+
+
+## {background-color="black"
+background-image="images/Method9.png" 
+background-size="contain"}
+
+
+
+## {background-color="black"
+background-image="images/Method10.png" 
+background-size="contain"}
+
+
+## {background-color="black"
+background-image="images/Method11.png" 
+background-size="contain"}
+
+
+
+
+
+
+## Methodology
+
+- Backcasting is a planning method that starts with defining a desirable future and then works backwards to identify policies and programs that will connect that specified future to the present.
+
+
+## Methodology
+
+- Backcasting is a planning method that starts with defining a desirable future and then works backwards to identify policies and programs that will connect that specified future to the present.
+
+
+- This approach allows us to strategically assess how current or future observations fit into historical trends and influences.
+
+## Off-line Phase
+
+- Build a model of a system's typical behaviour
+
+
+- Use the Exponential Smoothing State Space model with low smoothing parameters for the level and slope, and a high dampening parameter for the slope, emphasizing recent observation influence in backcasting.
+
+
+## {background-color="white"
+background-image="images/typical_model.png" 
+background-size="70%"}
+
+
+## {background-color="white"
+background-image="images/fittedvaluesinitial.png" 
+background-size="50%"
+background-position="50% 80%,center"}
+
+Move the window one step ahead with each new data point 
+
+
+## {background-color="white"
+background-image="images/fittedvalues.png" 
+background-size="50%"
+background-position="50% 80%,center"}
+
+For each new data subset reinitialize the model state with new data without changing the estimated parameters.
+
+
+##  {background-color="white"
+background-image="images/backcastedval.png" 
+background-size="50%"
+background-position="50% 80%,center"}
+
+
+Generating one-step backward projections using a refitted backcasting model.
+
+##  {background-color="white"
+background-image="images/errorseriesa.png" 
+background-size="50%"
+background-position="50% 80%,center"}
+
+
+Compare the backcasted values with the actual observed values.
+
+## Block Maxima Method for Anomalous Threshold Calculation 
+
+- Select error data from the typical behaviour 
+
+- Divide error data into blocks and extract block maxima and minima
+
+- Apply Generalized Extreme Value distribution to the block maxima and minima to model extreme error values
+
+- Determine the 95th percentile (upper threshold) and 5th percentile (lower threshold) of the GEV distribution
+
+
+## {background-color="white"
+background-image="images/errorseries1.png" 
+background-size="60%"
+background-position="50% 10%,center"}
 

@@ -414,7 +414,7 @@ background-size="60%"
 background-position="50% 60%,center"}
 
 
-Compare the backcasted values with the actual observed values.
+Compare the backcasted values with the actual trend values.
 
 ##  {background-color="white"
 background-image="images/errorseriesnewb.png" 
@@ -422,7 +422,7 @@ background-size="60%"
 background-position="50% 60%,center"}
 
 
-Compare the backcasted values with the actual observed values.
+Compare the backcasted values with the actual trend values.
 
 ## Block Maxima Method for Anomalous Threshold Calculation 
 
@@ -492,3 +492,32 @@ This work was supported in part by the RETINA research lab, funded by the OWSD, 
 Slides available at: prital.netlify.app
 
 ![](images/QR.png){fig-align="center" width=25}
+
+##
+##
+
+## Parameters in the Exponential Smoothing State Space Model
+
+Low Smoothing Parameter for the Level
+
+- Controls how much weight is given to the most recent observations when updating the level component.
+
+- Effect: A low places more emphasis on recent observations, making the model more responsive to recent changes in the data. This is particularly useful for capturing short-term fluctuations and trends.
+
+## Parameters in the Exponential Smoothing State Space Model
+
+Low Smoothing Parameter for the Slope 
+
+- Determines how much weight is assigned to changes in the level over time.
+
+- Effect: A low vale means that changes in the trend (slope) component are primarily influenced by recent changes in the level. 
+
+- This parameter helps adjust the slope to reflect recent trends while smoothing out noise.
+
+## Parameters in the Exponential Smoothing State Space Model
+
+High Damping Parameter for the Slope
+
+- Controls the rate at which the trend (slope) component reverts to a long-term mean.
+
+- Effect: A high value indicates strong damping, causing the slope to revert quickly to its long-term average. This helps stabilize the trend component against short-term fluctuations, providing a smoother forecast.

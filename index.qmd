@@ -68,7 +68,7 @@ library(viridis)
 ```
 ## Anomalies in Temporal Data
 
-```{r tsout, fig.height= 6}
+```{r tsout, fig.height= 4}
 data <- srilanka_weekly_data |>
   filter(district == "Gampaha") |>
   select(start.date, cases) 

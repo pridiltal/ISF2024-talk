@@ -132,6 +132,22 @@ print(p)
 
 Data Source: https://denguedatahub.netlify.app/
 
+## Weekly Dengue Cases in Sri Lanka
+
+```{r denguesl2, fig.width=14, fig.height = 8}
+
+
+#  Visualizing colombo district cases
+number_ticks <- function(n) {function(limits) pretty(limits, n)}
+p<- srilanka_weekly_data %>%  
+ggplot(aes(x=start.date, y=cases)) + geom_line()  + 
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  facet_wrap(vars(district), scales = "free_y", ncol=6) +
+  labs(x = "Date" , y="Cases")
+
+print(p)
+```
 
 ## Weekly Dengue Cases in Sri Lanka
 
@@ -149,22 +165,7 @@ ggplot(aes(x=start.date, y=cases)) + geom_line()  +
 
 print(p)
 ```
-## Weekly Dengue Cases in Sri Lanka
 
-```{r denguesl2, fig.width=14, fig.height = 8}
-
-
-#  Visualizing colombo district cases
-number_ticks <- function(n) {function(limits) pretty(limits, n)}
-p<- srilanka_weekly_data %>%  
-ggplot(aes(x=start.date, y=cases)) + geom_line()  + 
-  scale_x_date(date_breaks = "1 year", date_labels = "%Y") + 
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
-  facet_wrap(vars(district), scales = "free_y", ncol=6) +
-  labs(x = "Date" , y="Cases")
-
-print(p)
-```
 
 ## {background-color="black" background-image="images/covid.png" 
 background-size="slide" }
@@ -203,21 +204,85 @@ print(p)
 
 ### Outbreak 
 
-An occurrence of a disease in a specific geographic area that is significantly higher than the established baselines. This increase can be either sudden or gradual.
+- An occurrence of a disease in a specific geographic area that is significantly higher than the established baselines. 
+
+- This increase can be either sudden or gradual.
 
 ## {auto-animate=true}
 
 ### Outbreak 
 
-An occurrence of a disease in a specific geographic area that is significantly higher than the established baselines. This increase can be either sudden or gradual.
+- An occurrence of a disease in a specific geographic area that is significantly higher than the established baselines. 
 
+- This increase can be either sudden or gradual.
+
+
+\quad\quad
 
 ### What is an Anomaly ?
 
-We define an anomaly as an observation that is very unlikely given the backcasted distribution.
+- We define an anomaly as an observation that is very unlikely given the backcasted distribution.
 
-An anomaly is an observation that exhibits a significant deviation from the established typical behavior.
+- An anomaly is an observation that exhibits a significant deviation from the established typical behaviour.
 
+
+
+## Methodology
+
+- Backcasting is a planning method that starts with defining a desirable future and then works backwards to identify policies and programs that will connect that specified future to the present.
+
+
+## Methodology
+
+- Backcasting is a planning method that starts with defining a desirable future and then works backwards to identify policies and programs that will connect that specified future to the present.
+
+
+- This approach allows us to strategically assess how current or future observations fit into historical trends and influences.
+
+## Off-line Phase
+
+- Build a model of a system's typical behaviour.
+
+
+## Off-line Phase
+
+- Build a model of a system's typical behaviour.
+
+- The trend component is calculated using locally estimated scatterplot smoothing method
+
+
+## Off-line Phase
+
+- Build a model of a system's typical behaviour.
+
+- The trend component is calculated using locally estimated scatterplot smoothing (Loess) method
+
+- Outbreaks of new or re-emerging diseases, such as SARS, MERS, or COVID-19, may not initially show clear seasonal patterns. 
+
+
+
+## Off-line Phase
+
+- Build a model of a system's typical behaviour.
+
+- The trend component is calculated using locally estimated scatterplot smoothing (Loess) method
+
+- Outbreaks of new or re-emerging diseases, such as SARS, MERS, or COVID-19, may not initially show clear seasonal patterns. 
+
+- Their spread is often influenced by factors such as human behavior, travel, and public health interventions rather than environmental seasonality.
+
+## {background-color="black"
+background-image="images/STL1.png" 
+background-size="contain"}
+
+
+## {background-color="black"
+background-image="images/STL2.png" 
+background-size="contain"}
+
+## Off-line Phase
+
+- Use the Exponential Smoothing State Space model with low smoothing parameters for the level and slope, and a high dampening parameter for the slope, emphasizing recent observation influence in backcasting.
 
 ## {background-color="black"
 background-image="images/Method1.png" 
@@ -280,62 +345,75 @@ background-size="contain"}
 
 
 
-## Methodology
-
-- Backcasting is a planning method that starts with defining a desirable future and then works backwards to identify policies and programs that will connect that specified future to the present.
-
-
-## Methodology
-
-- Backcasting is a planning method that starts with defining a desirable future and then works backwards to identify policies and programs that will connect that specified future to the present.
-
-
-- This approach allows us to strategically assess how current or future observations fit into historical trends and influences.
-
-## Off-line Phase
-
-- Build a model of a system's typical behaviour
-
-
-- Use the Exponential Smoothing State Space model with low smoothing parameters for the level and slope, and a high dampening parameter for the slope, emphasizing recent observation influence in backcasting.
-
 
 ## {background-color="white"
-background-image="images/typical_model.png" 
-background-size="70%"}
+background-image="images/typical_modelnew.png" 
+background-size="60%"
+background-position="50% 60%,center"}
 
+Build a model of a system's typical behaviour.
 
 ## {background-color="white"
-background-image="images/fittedvaluesinitial.png" 
-background-size="50%"
-background-position="50% 80%,center"}
+background-image="images/fittedvaluesinitialnew.png" 
+background-size="60%"
+background-position="50% 60%,center"}
 
 Move the window one step ahead with each new data point 
 
 
 ## {background-color="white"
-background-image="images/fittedvalues.png" 
-background-size="50%"
-background-position="50% 80%,center"}
+background-image="images/fittedvaluesnew.png" 
+background-size="60%"
+background-position="50% 60%,center"}
 
 For each new data subset reinitialize the model state with new data without changing the estimated parameters.
 
 
 ##  {background-color="white"
-background-image="images/backcastedval.png" 
-background-size="50%"
-background-position="50% 80%,center"}
+background-image="images/backcastedvalnew.png" 
+background-size="60%"
+background-position="50% 60%,center"}
 
 
 Generating one-step backward projections using a refitted backcasting model.
 
 ##  {background-color="white"
-background-image="images/errorseriesa.png" 
-background-size="50%"
-background-position="50% 80%,center"}
+background-image="images/errorseriesnew.png" 
+background-size="60%"
+background-position="50% 60%,center"}
 
 
 Compare the backcasted values with the actual observed values.
+
+##  {background-color="white"
+background-image="images/errorseriesnewb.png" 
+background-size="60%"
+background-position="50% 60%,center"}
+
+
+Compare the backcasted values with the actual observed values.
+
+## Block Maxima Method for Anomalous Threshold Calculation 
+
+- Select error data from the typical behaviour 
+
+
+## Block Maxima Method for Anomalous Threshold Calculation 
+
+- Select error data from the typical behaviour 
+
+- Divide error data into blocks and extract block maxima and minima
+
+
+## Block Maxima Method for Anomalous Threshold Calculation 
+
+- Select error data from the typical behaviour 
+
+- Divide error data into blocks and extract block maxima and minima
+
+- Apply Generalized Extreme Value distribution to the block maxima and minima to model extreme error values
+
+
 
 ## Block Maxima Method for Anomalous Threshold Calculation 
 
@@ -349,7 +427,37 @@ Compare the backcasted values with the actual observed values.
 
 
 ## {background-color="white"
-background-image="images/errorseries1.png" 
-background-size="60%"
+background-image="images/anoamliesnew.png" 
+background-size="80%"
 background-position="50% 10%,center"}
 
+## What Next?
+
+- Determine the optimal rolling window size for capturing typical behavior patterns.
+
+
+## What Next?
+
+- Determine the optimal rolling window size for capturing typical behavior patterns.
+
+- Conduct further experiments with various weighted backcasting approaches beyond exponential smoothing.
+
+
+
+## What Next?
+
+- Determine the optimal rolling window size for capturing typical behavior patterns.
+
+- Conduct further experiments with various weighted backcasting approaches beyond exponential smoothing.
+
+- Extend the algorithm to handle multivariate data streams.
+
+
+## Thank you {style="text-align: center;"}
+
+
+This work was supported in part by the RETINA research lab, funded by the OWSD, a program unit of the United Nations Educational, Scientific, and Cultural Organization (UNESCO).
+
+Slides available at: prital.netlify.app
+
+![](images/QR.png){fig-align="center" width=25}

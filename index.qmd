@@ -286,7 +286,7 @@ print(p)
 
 - Build a model of a system's typical behaviour.
 
-- The trend component is calculated using locally estimated scatterplot smoothing (Loess) method
+- The trend component is calculated using locally estimated scatterplot smoothing (loess) method
 
 - Outbreaks of new or re-emerging diseases, such as SARS, MERS, or COVID-19, may not initially show clear seasonal patterns. 
 

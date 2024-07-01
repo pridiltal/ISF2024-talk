@@ -221,6 +221,37 @@ print(p)
 
 ### What is an Anomaly ?
 
+## {auto-animate=true}
+
+### Outbreak 
+
+- An occurrence of a disease in a specific geographic area that is significantly higher than the established baselines. 
+
+- This increase can be either sudden or gradual.
+
+
+\quad\quad
+
+### What is an Anomaly ?
+
+- We define an anomaly as an observation that is very unlikely given the backcasted distribution.
+
+
+
+
+## {auto-animate=true}
+
+### Outbreak 
+
+- An occurrence of a disease in a specific geographic area that is significantly higher than the established baselines. 
+
+- This increase can be either sudden or gradual.
+
+
+\quad\quad
+
+### What is an Anomaly ?
+
 - We define an anomaly as an observation that is very unlikely given the backcasted distribution.
 
 - An anomaly is an observation that exhibits a significant deviation from the established typical behaviour.

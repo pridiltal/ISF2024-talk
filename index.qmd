@@ -93,6 +93,7 @@ ggplotly(p)
 background-size="slide" 
 background-position="50% 50%, bottom"}
 
+Major Health Problem in Sri Lanka.
 
 
 ::: {.footer}
@@ -286,7 +287,7 @@ print(p)
 
 - Build a model of a system's typical behaviour.
 
-- The trend component is calculated using locally estimated scatterplot smoothing (loess) method
+- The trend component is calculated using locally estimated scatterplot smoothing method
 
 - Outbreaks of new or re-emerging diseases, such as SARS, MERS, or COVID-19, may not initially show clear seasonal patterns. 
 
@@ -296,7 +297,7 @@ print(p)
 
 - Build a model of a system's typical behaviour.
 
-- The trend component is calculated using locally estimated scatterplot smoothing (Loess) method
+- The trend component is calculated using locally estimated scatterplot smoothing method
 
 - Outbreaks of new or re-emerging diseases, such as SARS, MERS, or COVID-19, may not initially show clear seasonal patterns. 
 
@@ -406,7 +407,7 @@ background-size="60%"
 background-position="50% 60%,center"}
 
 
-Generating one-step backward projections using a refitted backcasting model.
+Generate one-step backward projections using a refitted backcasting model.
 
 ##  {background-color="white"
 background-image="images/errorseriesnew.png" 
